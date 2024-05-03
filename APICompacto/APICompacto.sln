@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33815.320
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APICompacto", "APICompacto\APICompacto.csproj", "{BE4C4111-E5BD-435D-BB93-A72A81B4B23F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BE4C4111-E5BD-435D-BB93-A72A81B4B23F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BE4C4111-E5BD-435D-BB93-A72A81B4B23F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BE4C4111-E5BD-435D-BB93-A72A81B4B23F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BE4C4111-E5BD-435D-BB93-A72A81B4B23F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AEEC1A4B-3884-427B-8FD0-C955521BBC58}
+	EndGlobalSection
+EndGlobal
