@@ -23,7 +23,7 @@ namespace FirmasDig
                 //var ficheroSalida = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
                 //ficheroSalida = Path.Combine(ficheroSalida, "pk12FicheroCambiado.p12");
                 // Exportar el certificado con la nueva contraseña
-                byte[] exportedData = certificate.Export(X509ContentType.Pkcs12, contrasenaNueva);
+                byte[] exportedData = certificate.Export(X509ContentType.Cert, contrasenaNueva);
                 result = exportedData;
                 // Guardar el certificado exportado con la nueva contraseña
                 //System.IO.File.WriteAllBytes(ficheroSalida, exportedData);
