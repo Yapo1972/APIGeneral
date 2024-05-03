@@ -2,6 +2,7 @@
 
 using ContratosCore;
 using CumplimientoVentas;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using UtilesGenerales;
 var misOrigenesPermitidos = "_misOrigenesPermitidos";
@@ -39,6 +40,7 @@ Configurador.mapeandoFichasTecnicas(app);
 Configurador.mapeandoCV(app);
 Configurador.mapeandoCPCU(app);
 Configurador.mapeandoTransPortacion(app);
+Configurador.mapeandoFirmasDigitales(app);
 
 app.Run();
 
@@ -112,15 +114,23 @@ public static class Configurador
     {
         app.MapGet("/transportacion/materiasprimas", (DateTime fechaI, DateTime fechaF) =>
         {
-            return Transportacion.gastosTransportacionMateriaPrima(fechaI,fechaF);
+            return Transportacion.gastosTransportacionMateriaPrima(fechaI, fechaF);
         });
 
     }
     public static void mapeandoFirmasDigitales(WebApplication app)
     {
-        app.MapGet("/firmasdigitales/cambiarcontrasena", (string ficheroPK12, string contrasenaVieja, string contrasenaNueva) =>
+        app.MapPost("/firmasdigitales/cambiarcontrasena", (HttpRequest peticion) =>
         {
-            return FirmasDig.FirmasDigitales.cambiarContrasena( ficheroPK12,contrasenaVieja, contrasenaNueva);
+            string ficheroPK12 = "", contrasenaVieja = "", contrasenaNueva = "";
+            if (peticion.Form.ContainsKey("contrasenaVieja"))
+                contrasenaVieja = peticion.Form["contrasenaVieja"];
+            if (peticion.Form.ContainsKey("contrasenaNueva"))
+                contrasenaNueva = peticion.Form["contrasenaNueva"];
+            if (peticion.Form.ContainsKey("ficheroPK12"))
+                ficheroPK12 = peticion.Form["ficheroPK12"];
+
+            return FirmasDig.FirmasDigitales.cambiarContrasena(ficheroPK12, contrasenaVieja, contrasenaNueva);
         });
 
     }

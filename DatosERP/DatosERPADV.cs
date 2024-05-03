@@ -18,32 +18,37 @@ namespace DatosERP
 
     public static class DatosERPADV
     {
-        public static async Task DatosAlbaranAsync()
-        {
-            var cadenaConexion = new ConexionPostgres("BDERPADV");
-            var con = new NpgsqlConnection( connectionString: cadenaConexion.obtener()) );
-            con.Open();
-            using var cmd = new NpgsqlCommand();
-            cmd.Connection = con;
-            cmd.CommandText = $"SELECT * FROM fact.albaran";
-            NpgsqlDataReader reader = await cmd.ExecuteReaderAsync();
-            var result = new List<DatosClientes>();
-            while (await reader.ReadAsync())
-            {
-                result.Add(new DatosClientes
+        //public static async Task<List<DatosClientes>> DatosAlbaranAsync()
+        //{
+        //    var cadenaConexion = new ConexionPostgres("BDERPADV");
+        //    var con = new NpgsqlConnection( connectionString: cadenaConexion.obtener()) ;
+        //    con.Open();
+        //    using var cmd = new NpgsqlCommand();
+        //    cmd.Connection = con;
+        //    cmd.CommandText = $"SELECT * FROM fact.albaran";
+        //    NpgsqlDataReader reader = await cmd.ExecuteReaderAsync();
+        //    var result = new List<DatosClientes>();
+        //    while (await reader.ReadAsync())
+        //    {
+        //        result.Add(new DatosClientes
 
-                    //id: (int)reader["id"],
-                    //first_name: reader[1] as string, // column index can be used
-                    //last_name: reader.GetString(2), // another syntax option
-                    //subject: reader["subject"] as string,
-                    //salary: (int)reader["salary"])
+        //            //id: (int)reader["id"],
+        //            //first_name: reader[1] as string, // column index can be used
+        //            //last_name: reader.GetString(2), // another syntax option
+        //            //subject: reader["subject"] as string,
+        //            //salary: (int)reader["salary"])
                     
-                {
-                    idCliente = reader["cod_empresa"] as string ?? ""
-                });
+        //        {
+        //            idCliente = reader["cod_empresa"] as string ?? ""
+        //        });
 
-            }
-            return result;
-        }
+        //    }
+        //    return result;
+        //}
+    }
+
+    internal class DatosClientes
+    {
+        internal string idCliente;
     }
 }

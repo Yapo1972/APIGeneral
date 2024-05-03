@@ -6,7 +6,7 @@ namespace FirmasDig
     {
         public static string cambiarContrasena(string ficheroPK12, string contrasenaVieja, string contrasenaNueva)
         {
-            byte[] result = Convert.FromBase64String("FALSO");
+            byte[] result = Convert.FromBase64String("");
             var datosFichero = Convert.FromBase64String( ficheroPK12 );
             var caminoFichero = Path.Combine(Environment.GetFolderPath( Environment.SpecialFolder.LocalApplicationData ),"pk12Actual.p12");
             // Crear o sobrescribir el archivo binario
