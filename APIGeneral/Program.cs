@@ -2,7 +2,8 @@
 
 using ContratosCore;
 using CumplimientoVentas;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using UtilesGenerales;
 var misOrigenesPermitidos = "_misOrigenesPermitidos";
@@ -65,7 +66,7 @@ public static class Configurador
     }
     public static void mapeandoFichasTecnicas(WebApplication app)
     {
-        app.MapGet("/fichasTecnicas/obtener", (string ft) =>
+        app.MapGet("/fichasTecnicas/obtener",[EnableCors("_misOrigenesPermitidos")] (string ft) =>
         {
             return FichasTecnicas.obtenerFicheroFichaTecnica(ft);
         });
@@ -123,14 +124,22 @@ public static class Configurador
         app.MapPost("/firmasdigitales/cambiarcontrasena", (HttpRequest peticion) =>
         {
             string ficheroPK12 = "", contrasenaVieja = "", contrasenaNueva = "";
+            var nombreFichero = Path.Combine( Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ficheroTemporal.p12");
+            if(File.Exists(nombreFichero)) File.Delete(nombreFichero);
+            var ficheroPK12Real = new FileStream(nombreFichero,FileMode.Create);
             if (peticion.Form.ContainsKey("contrasenaVieja"))
                 contrasenaVieja = peticion.Form["contrasenaVieja"];
             if (peticion.Form.ContainsKey("contrasenaNueva"))
                 contrasenaNueva = peticion.Form["contrasenaNueva"];
             if (peticion.Form.ContainsKey("ficheroPK12"))
                 ficheroPK12 = peticion.Form["ficheroPK12"];
-
-            return FirmasDig.FirmasDigitales.cambiarContrasena(ficheroPK12, contrasenaVieja, contrasenaNueva);
+            if( peticion.Form.Files.Count > 0 )
+            {
+                var fichero = peticion.Form.Files[0];
+                fichero.CopyTo( ficheroPK12Real );
+                ficheroPK12Real.Close();
+            }
+            return Results.File( FirmasDig.FirmasDigitales.cambiarContrasena(nombreFichero, contrasenaVieja, contrasenaNueva)/*,"application/x-pkcs-12"*/);
         });
 
     }
