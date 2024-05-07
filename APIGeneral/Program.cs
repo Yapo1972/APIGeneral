@@ -4,7 +4,9 @@ using ContratosCore;
 using CumplimientoVentas;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection.Metadata.Ecma335;
 using UtilesGenerales;
 var misOrigenesPermitidos = "_misOrigenesPermitidos";
 var builder = WebApplication.CreateBuilder(args);
@@ -121,26 +123,25 @@ public static class Configurador
     }
     public static void mapeandoFirmasDigitales(WebApplication app)
     {
-        app.MapPost("/firmasdigitales/cambiarcontrasena", (HttpRequest peticion) =>
+        app.MapPost("/firmasdigitales/cambiarcontrasena", ([FromForm] string contrasenaVieja, [FromForm] string contrasenaNueva, [FromForm] IFormFile fichero) =>
         {
-            string ficheroPK12 = "", contrasenaVieja = "", contrasenaNueva = "";
-            var nombreFichero = Path.Combine( Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "ficheroTemporal.p12");
+//            string ficheroPK12 = "", contrasenaVieja = "", contrasenaNueva = "";
+            var nombreFichero = Path.Combine( Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "ficheroTemporal.p12");
             if(File.Exists(nombreFichero)) File.Delete(nombreFichero);
             var ficheroPK12Real = new FileStream(nombreFichero,FileMode.Create);
-            if (peticion.Form.ContainsKey("contrasenaVieja"))
-                contrasenaVieja = peticion.Form["contrasenaVieja"];
-            if (peticion.Form.ContainsKey("contrasenaNueva"))
-                contrasenaNueva = peticion.Form["contrasenaNueva"];
-            if (peticion.Form.ContainsKey("ficheroPK12"))
-                ficheroPK12 = peticion.Form["ficheroPK12"];
-            if( peticion.Form.Files.Count > 0 )
-            {
-                var fichero = peticion.Form.Files[0];
+            //if (peticion.Form.ContainsKey("contrasenaVieja"))
+            //    contrasenaVieja = peticion.Form["contrasenaVieja"];
+            //if (peticion.Form.ContainsKey("contrasenaNueva"))
+            //    contrasenaNueva = peticion.Form["contrasenaNueva"];
+            //if (peticion.Form.ContainsKey("ficheroPK12"))
+            //    ficheroPK12 = peticion.Form["ficheroPK12"];
+            //if( peticion.Form.Files.Count > 0 )
+            //{
+            //    var fichero = peticion.Form.Files[0];
                 fichero.CopyTo( ficheroPK12Real );
                 ficheroPK12Real.Close();
-            }
-            return Results.File( FirmasDig.FirmasDigitales.cambiarContrasena(nombreFichero, contrasenaVieja, contrasenaNueva)/*,"application/x-pkcs-12"*/);
-        });
-
+            //}
+            return Results.File( FirmasDig.FirmasDigitales.cambiarContrasena(nombreFichero, contrasenaVieja, contrasenaNueva),"application/x-pkcs-12");
+        }).DisableAntiforgery();
     }
 }

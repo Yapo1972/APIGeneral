@@ -21,7 +21,7 @@ namespace FirmasDig
             {
                 // Cargar el archivo .p12 con la contraseña actual
                var certificate = new X509Certificate2(ficheroPK12, contrasenaVieja, X509KeyStorageFlags.Exportable);
-               resultado = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+               resultado = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
                resultado = Path.Combine(resultado, "pk12FicheroCambiado.p12");
                 // Exportar el certificado con la nueva contraseña
                 byte[] exportedData = certificate.Export(X509ContentType.Pkcs12, contrasenaNueva);
