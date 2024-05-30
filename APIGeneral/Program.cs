@@ -44,6 +44,7 @@ Configurador.mapeandoCV(app);
 Configurador.mapeandoCPCU(app);
 Configurador.mapeandoTransPortacion(app);
 Configurador.mapeandoFirmasDigitales(app);
+Configurador.mapeandoUtilesGenerales(app);
 
 app.Run();
 
@@ -144,4 +145,16 @@ public static class Configurador
             return Results.File( FirmasDig.FirmasDigitales.cambiarContrasena(nombreFichero, contrasenaVieja, contrasenaNueva),"application/x-pkcs-12");
         }).DisableAntiforgery();
     }
+
+    public static void mapeandoUtilesGenerales(WebApplication app)
+    {
+        app.MapGet("/datosTecnicos/listaTodosDT", (string comienzaPor) =>
+        {
+            return UtilesGenerales.DatosTecnicos.obtenerTodosDatosTecnicos(comienzaPor);
+        });
+
+    }
+
+
+
 }

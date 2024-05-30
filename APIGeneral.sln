@@ -13,6 +13,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatosERP", "DatosERP\DatosE
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FirmasDigitales", "FirmasDigitales\FirmasDigitales.csproj", "{B8E4B913-FF10-47F1-9DE2-B1E14B211E24}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UtilesGenerales", "UtilesGenerales\UtilesGenerales.csproj", "{7E9F77CC-32C1-45C0-A5B7-2A324FD39D43}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{B8E4B913-FF10-47F1-9DE2-B1E14B211E24}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8E4B913-FF10-47F1-9DE2-B1E14B211E24}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8E4B913-FF10-47F1-9DE2-B1E14B211E24}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E9F77CC-32C1-45C0-A5B7-2A324FD39D43}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E9F77CC-32C1-45C0-A5B7-2A324FD39D43}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E9F77CC-32C1-45C0-A5B7-2A324FD39D43}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E9F77CC-32C1-45C0-A5B7-2A324FD39D43}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
